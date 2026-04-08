@@ -875,6 +875,9 @@ func (sw *saiSwitch) CreateSwitch(ctx context.Context, _ *saipb.CreateSwitchRequ
 		SwitchShellEnable:              proto.Bool(false),
 		SwitchProfileId:                proto.Uint32(0),
 		NatZoneCounterObjectId:         proto.Uint64(0),
+		DisableVlanChecks:              proto.Bool(false),
+		DisableIngressVlanChecks:       proto.Bool(false),
+		DisableEgressVlanChecks:        proto.Bool(false),
 	}
 	sw.mgr.StoreAttributes(swID, attrs)
 	return &saipb.CreateSwitchResponse{

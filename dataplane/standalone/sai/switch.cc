@@ -759,6 +759,15 @@ sai_status_t l_set_switch_attribute(sai_object_id_t switch_id,
           attr->value.objlist.list,
           attr->value.objlist.list + attr->value.objlist.count);
       break;
+    case SAI_SWITCH_ATTR_DISABLE_VLAN_CHECKS:
+      req.set_disable_vlan_checks(attr->value.booldata);
+      break;
+    case SAI_SWITCH_ATTR_DISABLE_INGRESS_VLAN_CHECKS:
+      req.set_disable_ingress_vlan_checks(attr->value.booldata);
+      break;
+    case SAI_SWITCH_ATTR_DISABLE_EGRESS_VLAN_CHECKS:
+      req.set_disable_egress_vlan_checks(attr->value.booldata);
+      break;
   }
 
   grpc::Status status = switch_->SetSwitchAttribute(&context, req, &resp);
@@ -1509,6 +1518,15 @@ sai_status_t l_get_switch_attribute(sai_object_id_t switch_id,
         copy_list(attr_list[i].value.objlist.list,
                   resp.attr().selective_counter_list(),
                   &attr_list[i].value.objlist.count);
+        break;
+      case SAI_SWITCH_ATTR_DISABLE_VLAN_CHECKS:
+        attr_list[i].value.booldata = resp.attr().disable_vlan_checks();
+        break;
+      case SAI_SWITCH_ATTR_DISABLE_INGRESS_VLAN_CHECKS:
+        attr_list[i].value.booldata = resp.attr().disable_ingress_vlan_checks();
+        break;
+      case SAI_SWITCH_ATTR_DISABLE_EGRESS_VLAN_CHECKS:
+        attr_list[i].value.booldata = resp.attr().disable_egress_vlan_checks();
         break;
     }
   }

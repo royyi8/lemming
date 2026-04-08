@@ -4567,6 +4567,9 @@ message SwitchAttribute {
   optional uint32 max_icmp_echo_session = 219 [(attr_enum_value) = 235];
   optional StatsCountMode stats_count_mode = 220 [(attr_enum_value) = 236];
   repeated uint64 selective_counter_list = 221 [(attr_enum_value) = 237];
+  optional bool disable_vlan_checks = 222 [(attr_enum_value) = 238];
+  optional bool disable_ingress_vlan_checks = 223 [(attr_enum_value) = 239];
+  optional bool disable_egress_vlan_checks = 224 [(attr_enum_value) = 240];
 }
 
 message SwitchTunnelAttribute {

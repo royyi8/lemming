@@ -132,6 +132,9 @@ func TestCreateSwitch(t *testing.T) {
 		SwitchShellEnable:              proto.Bool(false),
 		SwitchProfileId:                proto.Uint32(0),
 		NatZoneCounterObjectId:         proto.Uint64(0),
+		DisableVlanChecks:              proto.Bool(false),
+		DisableIngressVlanChecks:       proto.Bool(false),
+		DisableEgressVlanChecks:        proto.Bool(false),
 	}
 	attr := &saipb.SwitchAttribute{}
 	if err := mgr.PopulateAllAttributes("1", attr); err != nil {

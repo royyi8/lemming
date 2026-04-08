@@ -29186,6 +29186,9 @@ type SwitchAttribute struct {
 	MaxIcmpEchoSession                             *uint32                           `protobuf:"varint,219,opt,name=max_icmp_echo_session,json=maxIcmpEchoSession,proto3,oneof" json:"max_icmp_echo_session,omitempty"`
 	StatsCountMode                                 *StatsCountMode                   `protobuf:"varint,220,opt,name=stats_count_mode,json=statsCountMode,proto3,enum=lemming.dataplane.sai.StatsCountMode,oneof" json:"stats_count_mode,omitempty"`
 	SelectiveCounterList                           []uint64                          `protobuf:"varint,221,rep,packed,name=selective_counter_list,json=selectiveCounterList,proto3" json:"selective_counter_list,omitempty"`
+	DisableVlanChecks                              *bool                             `protobuf:"varint,222,opt,name=disable_vlan_checks,json=disableVlanChecks,proto3,oneof" json:"disable_vlan_checks,omitempty"`
+	DisableIngressVlanChecks                       *bool                             `protobuf:"varint,223,opt,name=disable_ingress_vlan_checks,json=disableIngressVlanChecks,proto3,oneof" json:"disable_ingress_vlan_checks,omitempty"`
+	DisableEgressVlanChecks                        *bool                             `protobuf:"varint,224,opt,name=disable_egress_vlan_checks,json=disableEgressVlanChecks,proto3,oneof" json:"disable_egress_vlan_checks,omitempty"`
 	unknownFields                                  protoimpl.UnknownFields
 	sizeCache                                      protoimpl.SizeCache
 }
@@ -30765,6 +30768,27 @@ func (x *SwitchAttribute) GetSelectiveCounterList() []uint64 {
 		return x.SelectiveCounterList
 	}
 	return nil
+}
+
+func (x *SwitchAttribute) GetDisableVlanChecks() bool {
+	if x != nil && x.DisableVlanChecks != nil {
+		return *x.DisableVlanChecks
+	}
+	return false
+}
+
+func (x *SwitchAttribute) GetDisableIngressVlanChecks() bool {
+	if x != nil && x.DisableIngressVlanChecks != nil {
+		return *x.DisableIngressVlanChecks
+	}
+	return false
+}
+
+func (x *SwitchAttribute) GetDisableEgressVlanChecks() bool {
+	if x != nil && x.DisableEgressVlanChecks != nil {
+		return *x.DisableEgressVlanChecks
+	}
+	return false
 }
 
 type SwitchTunnelAttribute struct {
@@ -36618,7 +36642,7 @@ const file_dataplane_proto_sai_common_proto_rawDesc = "" +
 	"\x05state\x18\x03 \x01(\x0e2#.lemming.dataplane.sai.StpPortStateB\x06\xf0ܓ\xad\x0f\x03H\x02R\x05state\x88\x01\x01B\x06\n" +
 	"\x04_stpB\x0e\n" +
 	"\f_bridge_portB\b\n" +
-	"\x06_state\"ܨ\x01\n" +
+	"\x06_state\"\x8f\xab\x01\n" +
 	"\x0fSwitchAttribute\x12@\n" +
 	"\x16number_of_active_ports\x18\x01 \x01(\rB\x06\xf0ܓ\xad\x0f\x01H\x00R\x13numberOfActivePorts\x88\x01\x01\x12M\n" +
 	"\x1dmax_number_of_supported_ports\x18\x02 \x01(\rB\x06\xf0ܓ\xad\x0f\x02H\x01R\x19maxNumberOfSupportedPorts\x88\x01\x01\x12#\n" +
@@ -36853,7 +36877,10 @@ const file_dataplane_proto_sai_common_proto_rawDesc = "" +
 	"\x1bavailable_icmp_echo_session\x18\xda\x01 \x01(\rB\a\xf0ܓ\xad\x0f\xea\x01H\xbd\x01R\x18availableIcmpEchoSession\x88\x01\x01\x12A\n" +
 	"\x15max_icmp_echo_session\x18\xdb\x01 \x01(\rB\a\xf0ܓ\xad\x0f\xeb\x01H\xbe\x01R\x12maxIcmpEchoSession\x88\x01\x01\x12_\n" +
 	"\x10stats_count_mode\x18\xdc\x01 \x01(\x0e2%.lemming.dataplane.sai.StatsCountModeB\a\xf0ܓ\xad\x0f\xec\x01H\xbf\x01R\x0estatsCountMode\x88\x01\x01\x12>\n" +
-	"\x16selective_counter_list\x18\xdd\x01 \x03(\x04B\a\xf0ܓ\xad\x0f\xed\x01R\x14selectiveCounterListB\x19\n" +
+	"\x16selective_counter_list\x18\xdd\x01 \x03(\x04B\a\xf0ܓ\xad\x0f\xed\x01R\x14selectiveCounterList\x12>\n" +
+	"\x13disable_vlan_checks\x18\xde\x01 \x01(\bB\a\xf0ܓ\xad\x0f\xee\x01H\xc0\x01R\x11disableVlanChecks\x88\x01\x01\x12M\n" +
+	"\x1bdisable_ingress_vlan_checks\x18\xdf\x01 \x01(\bB\a\xf0ܓ\xad\x0f\xef\x01H\xc1\x01R\x18disableIngressVlanChecks\x88\x01\x01\x12K\n" +
+	"\x1adisable_egress_vlan_checks\x18\xe0\x01 \x01(\bB\a\xf0ܓ\xad\x0f\xf0\x01H\xc2\x01R\x17disableEgressVlanChecks\x88\x01\x01B\x19\n" +
 	"\x17_number_of_active_portsB \n" +
 	"\x1e_max_number_of_supported_portsB\x0f\n" +
 	"\r_port_max_mtuB\v\n" +
@@ -37049,7 +37076,10 @@ const file_dataplane_proto_sai_common_proto_rawDesc = "" +
 	"\x16_acl_stage_pre_ingressB\x1e\n" +
 	"\x1c_available_icmp_echo_sessionB\x18\n" +
 	"\x16_max_icmp_echo_sessionB\x13\n" +
-	"\x11_stats_count_mode\"\xda\n" +
+	"\x11_stats_count_modeB\x16\n" +
+	"\x14_disable_vlan_checksB\x1e\n" +
+	"\x1c_disable_ingress_vlan_checksB\x1d\n" +
+	"\x1b_disable_egress_vlan_checks\"\xda\n" +
 	"\n" +
 	"\x15SwitchTunnelAttribute\x12O\n" +
 	"\vtunnel_type\x18\x01 \x01(\x0e2!.lemming.dataplane.sai.TunnelTypeB\x06\xf0ܓ\xad\x0f\x01H\x00R\n" +

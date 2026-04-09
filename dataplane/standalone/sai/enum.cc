@@ -15,6 +15,8 @@
 
 #include "dataplane/standalone/sai/enum.h"
 
+#include <glog/logging.h>
+
 lemming::dataplane::sai::AclActionType convert_sai_acl_action_type_t_to_proto(
     const sai_int32_t val) {
   switch (val) {
@@ -24109,6 +24111,14 @@ void convert_list_sai_switch_attr_extensions_t_to_sai(
 lemming::dataplane::sai::SwitchAttr convert_sai_switch_attr_t_to_proto(
     const sai_int32_t val) {
   switch (val) {
+    case 0x20000020:
+      LOG(INFO) << "HACK: Mapping raw ID " << val << " (hex: 0x" << std::hex << val << ") to SWITCH_ATTR_DISABLE_INGRESS_VLAN_CHECKS (239)";
+      return static_cast<lemming::dataplane::sai::SwitchAttr>(239);
+
+    case 0x20000021:
+      LOG(INFO) << "HACK: Mapping raw ID " << val << " (hex: 0x" << std::hex << val << ") to SWITCH_ATTR_DISABLE_EGRESS_VLAN_CHECKS (240)";
+      return static_cast<lemming::dataplane::sai::SwitchAttr>(240);
+
     case SAI_SWITCH_ATTR_NUMBER_OF_ACTIVE_PORTS:
       return lemming::dataplane::sai::SWITCH_ATTR_NUMBER_OF_ACTIVE_PORTS;
 
@@ -24865,6 +24875,7 @@ lemming::dataplane::sai::SwitchAttr convert_sai_switch_attr_t_to_proto(
       return lemming::dataplane::sai::SWITCH_ATTR_DISABLE_EGRESS_VLAN_CHECKS;
 
     default:
+      LOG(INFO) << "Unrecognized switch attribute ID: " << val << " (hex: 0x" << std::hex << val << ")";
       return lemming::dataplane::sai::SWITCH_ATTR_UNSPECIFIED;
   }
 }
